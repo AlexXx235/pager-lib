@@ -7,7 +7,7 @@ use serde_json::{Value, Map};
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Request {
     pub method: Method,
-    pub session_key: Option<String>
+    pub session_token: Option<String>
 }
 
 #[derive(Serialize, Deserialize)]
