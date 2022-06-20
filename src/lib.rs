@@ -32,7 +32,9 @@ pub enum EventType {
 pub enum Method {
     SignUp,
     LogIn,
-    Test
+    SendPrivateMessage,
+    SendChatMessage,
+    GetPrivateChat
 }
 
 #[derive(Serialize, Deserialize, Debug)]
