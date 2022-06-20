@@ -7,7 +7,7 @@ use serde_json::{Value, Map};
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Request {
     pub method: Method,
-    pub params: Value
+    pub session_key: Option<String>
 }
 
 #[derive(Serialize, Deserialize)]
@@ -30,11 +30,24 @@ pub enum EventType {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub enum Method {
-    SignUp,
-    LogIn,
-    SendPrivateMessage,
-    SendChatMessage,
-    GetPrivateChat
+    SignUp {
+        login: String,
+        password: String
+    },
+    LogIn {
+        login: String,
+        password: String
+    },
+    SendPrivateMessage {
+        message: String,
+        receiver_login: String
+    },
+    SendChatMessage {
+
+    },
+    GetPrivateChat {
+        second_user_login: String
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug)]
