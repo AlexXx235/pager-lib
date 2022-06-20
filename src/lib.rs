@@ -45,8 +45,11 @@ pub enum Method {
     SendChatMessage {
 
     },
-    GetPrivateChat {
+    GetPrivateChatMessages {
         second_user_login: String
+    },
+    GetAvailableChats {
+        
     }
 }
 
