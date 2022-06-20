@@ -42,15 +42,10 @@ pub enum Method {
         message: String,
         receiver_login: String
     },
-    SendChatMessage {
-
-    },
     GetPrivateChatMessages {
         second_user_login: String
     },
-    GetAvailableChats {
-        
-    }
+    GetAvailableChats
 }
 
 #[derive(Serialize, Deserialize, Debug)]
