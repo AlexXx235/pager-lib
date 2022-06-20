@@ -76,7 +76,8 @@ impl Error for RequestError {}
 #[derive(Serialize, Deserialize, Debug)]
 pub enum AuthError {
     AlreadySignedUp,
-    IncorrectCredentials
+    IncorrectCredentials,
+    IncorrectSessionToken
 }
 
 impl fmt::Display for AuthError {
@@ -87,6 +88,9 @@ impl fmt::Display for AuthError {
             },
             AuthError::IncorrectCredentials => {
                 write!(f, "incorrect login or password")
+            },
+            AuthError::IncorrectSessionToken => {
+                write!(f, "incorrect session token")
             }
         }
     }
