@@ -46,9 +46,7 @@ pub enum Method {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct  RequestResult {
     pub request_id: u32,
-    pub result: Result<Value, RequestError>
-    // Ok(Value),
-    // Err(RequestError),
+    pub result: Result<Option<Value>, RequestError>
 }
 
 #[derive(Serialize, Deserialize, Debug)]
