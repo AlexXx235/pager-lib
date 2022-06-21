@@ -6,14 +6,9 @@ use serde_json::{Value, Map};
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Request {
+    pub request_id: u32,
     pub method: Method,
     pub session_token: Option<String>
-}
-
-#[derive(Serialize, Deserialize)]
-pub struct Responce {
-    pub result: bool,
-    pub params: Value
 }
 
 #[derive(Serialize, Deserialize)]
@@ -49,9 +44,11 @@ pub enum Method {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub enum RequestResult {
-    Ok(Value),
-    Err(RequestError),
+pub struct  RequestResult {
+    pub request_id: u32,
+    pub result: Result<Value, RequestError>
+    // Ok(Value),
+    // Err(RequestError),
 }
 
 #[derive(Serialize, Deserialize, Debug)]
