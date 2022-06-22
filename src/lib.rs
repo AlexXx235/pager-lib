@@ -44,9 +44,18 @@ pub enum Method {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+pub enum MethodResult {
+    SignUp,
+    LogIn {
+        session_token: String,
+    },
+    SendPrivateMessage,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
 pub struct  RequestResult {
     pub request_id: u32,
-    pub result: Result<Option<Value>, RequestError>
+    pub result: Result<MethodResult, RequestError>
 }
 
 #[derive(Serialize, Deserialize, Debug)]
