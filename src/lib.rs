@@ -50,6 +50,9 @@ pub enum MethodResult {
         session_token: String,
     },
     SendPrivateMessage,
+    GetPrivateChatMessages {
+        messages: Vec<String>
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug)]
