@@ -53,15 +53,15 @@ pub enum MethodResult {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PrivateMessage {
-    text: String,
-    raw_timestamp: i64
+    pub text: String,
+    pub raw_timestamp: i64
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct ChatMessage {
-    text: String,
-    sender_login: String,
-    raw_timestamp: i64
+    pub text: String,
+    pub sender_login: String,
+    pub raw_timestamp: i64
 }
 
 #[derive(Serialize, Deserialize, Debug)]
