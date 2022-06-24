@@ -2,9 +2,6 @@ use std::error::Error;
 use std::fmt;
 
 use serde::{Serialize, Deserialize};
-use serde_json::{Value, Map};
-
-use chrono::NaiveDateTime;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Request {
@@ -13,7 +10,7 @@ pub struct Request {
     pub session_token: Option<String>
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub enum Event {
     NewPrivateMessage(PrivateMessage),
     NewChatMessage(ChatMessage)
@@ -54,14 +51,17 @@ pub enum MethodResult {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PrivateMessage {
     pub text: String,
-    pub raw_timestamp: i64
+    pub raw_timestamp: i64,
+    pub sender: String,
+    pub receiver: String
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct ChatMessage {
     pub text: String,
-    pub sender_login: String,
-    pub raw_timestamp: i64
+    pub raw_timestamp: i64,
+    pub sender: String,
+    pub chat: String
 }
 
 #[derive(Serialize, Deserialize, Debug)]
