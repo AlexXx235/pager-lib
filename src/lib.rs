@@ -59,11 +59,11 @@ pub struct PrivateMessage {
 }
 
 impl PrivateMessage {
-    fn new(text: String, timestamp: NaiveDateTime, sender_id: i32, receiver_id: i32) -> Self {
+    pub fn new(text: String, timestamp: NaiveDateTime, sender_id: i32, receiver_id: i32) -> Self {
         PrivateMessage { text, raw_timestamp: timestamp.timestamp(), sender_id, receiver_id }
     }
 
-    fn timestamp(&self) -> NaiveDateTime {
+    pub fn timestamp(&self) -> NaiveDateTime {
         NaiveDateTime::from_timestamp(self.raw_timestamp, 0)
     }
 }
@@ -77,11 +77,11 @@ pub struct ChatMessage {
 }
 
 impl ChatMessage {
-    fn new(text: String, timestamp: NaiveDateTime, sender_id: i32, chat_id: i32) -> Self {
+    pub fn new(text: String, timestamp: NaiveDateTime, sender_id: i32, chat_id: i32) -> Self {
         ChatMessage { text, raw_timestamp: timestamp.timestamp(), sender_id, chat_id }
     }
 
-    fn timestamp(&self) -> NaiveDateTime {
+    pub fn timestamp(&self) -> NaiveDateTime {
         NaiveDateTime::from_timestamp(self.raw_timestamp, 0)
     }
 }
