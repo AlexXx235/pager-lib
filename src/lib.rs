@@ -28,17 +28,16 @@ pub enum Method {
         login: String,
         password: String
     },
-    SendPrivateMessage {
-        message: String,
-        receiver_login: String
-    },
+    SendPrivateMessage(PrivateMessage),
+    SendChatMessage(ChatMessage),
     GetPrivateChatMessages {
-        second_user_login: String
+        second_user_id: i32
     },
+    GetUsers,
     GetAvailableChats
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub enum MethodResult {
     SignUp,
     LogIn {
@@ -47,10 +46,14 @@ pub enum MethodResult {
     SendPrivateMessage,
     GetPrivateChatMessages {
         messages: Vec<PrivateMessage>
+    },
+    GetUsers {
+        users: Vec<User>
     }
+
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct PrivateMessage {
     pub text: String,
     pub sender_id: i32,
@@ -73,7 +76,7 @@ pub struct ChatMessage {
     pub text: String,
     pub sender_id: i32,
     pub chat_id: i32,
-    pub raw_timestamp: i64
+    raw_timestamp: i64
 }
 
 impl ChatMessage {
@@ -86,13 +89,19 @@ impl ChatMessage {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct User {
+    pub id: i32,
+    pub login: String,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct RequestResult {
     pub request_id: u32,
     pub result: Result<MethodResult, RequestError>
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub enum RequestError {
     Auth(AuthError),
 }
@@ -109,7 +118,7 @@ impl fmt::Display for RequestError {
 
 impl Error for RequestError {}
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub enum AuthError {
     AlreadySignedUp,
     IncorrectCredentials,
