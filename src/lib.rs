@@ -43,6 +43,7 @@ pub enum Method {
 pub enum MethodResult {
     SignUp,
     LogIn {
+        user_id: i32,
         session_token: String,
     },
     SendPrivateMessage,
