@@ -1,6 +1,8 @@
 use std::error::Error;
 use std::fmt;
 
+use chrono::NaiveDateTime;
+use diesel::sql_types::Timestamp;
 use serde::{Serialize, Deserialize};
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -51,17 +53,37 @@ pub enum MethodResult {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PrivateMessage {
     pub text: String,
-    pub raw_timestamp: i64,
-    pub sender: String,
-    pub receiver: String
+    pub sender_id: i32,
+    pub receiver_id: i32,
+    raw_timestamp: i64,
+}
+
+impl PrivateMessage {
+    fn new(text: String, timestamp: NaiveDateTime, sender_id: i32, receiver_id: i32) -> Self {
+        PrivateMessage { text, raw_timestamp: timestamp.timestamp(), sender_id, receiver_id }
+    }
+
+    fn timestamp(&self) -> NaiveDateTime {
+        NaiveDateTime::from_timestamp(self.raw_timestamp, 0)
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct ChatMessage {
     pub text: String,
-    pub raw_timestamp: i64,
-    pub sender: String,
-    pub chat: String
+    pub sender_id: i32,
+    pub chat_id: i32,
+    pub raw_timestamp: i64
+}
+
+impl ChatMessage {
+    fn new(text: String, timestamp: NaiveDateTime, sender_id: i32, chat_id: i32) -> Self {
+        ChatMessage { text, raw_timestamp: timestamp.timestamp(), sender_id, chat_id }
+    }
+
+    fn timestamp(&self) -> NaiveDateTime {
+        NaiveDateTime::from_timestamp(self.raw_timestamp, 0)
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug)]
