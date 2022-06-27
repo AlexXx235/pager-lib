@@ -28,8 +28,10 @@ pub enum Method {
         login: String,
         password: String
     },
-    SendPrivateMessage(PrivateMessage),
-    SendChatMessage(ChatMessage),
+    SendPrivateMessage {
+        message: String,
+        receiver_id: i32
+    },
     GetPrivateChatMessages {
         second_user_id: i32
     },
