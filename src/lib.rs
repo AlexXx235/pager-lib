@@ -123,6 +123,7 @@ impl Error for RequestError {}
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub enum AuthError {
+    NotAuthenticated,
     AlreadySignedUp,
     IncorrectCredentials,
     IncorrectSessionToken
@@ -131,6 +132,9 @@ pub enum AuthError {
 impl fmt::Display for AuthError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
+            &AuthError::NotAuthenticated => {
+                write!(f, "user don't authenticated")
+            },
             AuthError::AlreadySignedUp => {
                 write!(f, "already signed up")
             },
