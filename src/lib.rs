@@ -32,8 +32,15 @@ pub enum Method {
         message: String,
         receiver_id: i32
     },
+    SendChatMessage {
+        message: String,
+        chat_id: i32
+    },
     GetPrivateChatMessages {
         second_user_id: i32
+    },
+    GetChatMessages {
+        chat_id: i32
     },
     GetUsers,
     GetAvailableChats
@@ -47,13 +54,19 @@ pub enum MethodResult {
         session_token: String,
     },
     SendPrivateMessage,
+    SendChatMessage,
+    GetChatMessages {
+        messages: Vec<ChatMessage>
+    },
     GetPrivateChatMessages {
         messages: Vec<PrivateMessage>
     },
     GetUsers {
         users: Vec<User>
+    },
+    GetAvailableChats {
+        chats: Vec<Chat>
     }
-
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -74,7 +87,7 @@ impl PrivateMessage {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ChatMessage {
     pub text: String,
     pub sender_id: i32,
@@ -96,6 +109,12 @@ impl ChatMessage {
 pub struct User {
     pub id: i32,
     pub login: String,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct Chat {
+    pub id: i32,
+    pub users: Vec<User>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
